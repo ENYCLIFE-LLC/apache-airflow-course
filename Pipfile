@@ -1,0 +1,21 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pytest = "*"
+pytest-mock = "*"
+pytest-cov = "*"
+black = "*"
+click = "*"
+behave = "*"
+
+[packages]
+apache-airflow = "==2.9.0"
+apache-airflow-providers-amazon = "*"
+apache-airflow-providers-github = "*"
+
+
+[requires]
+python_version = "3.9"
