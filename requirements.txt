@@ -4,6 +4,9 @@ black==24.8.0
 behave==1.2.6
 isort==5.13.2
 flake8==7.1.1
+wheel==0.37.0
 apache-airflow==2.9.2
-apache-airflow-providers-amazon
-apache-airflow-providers-github
+apache-airflow-providers-amazon==8.27.0
+apache-airflow-providers-github==2.6.2
+scikit-learn==1.5.1
+pandas==2.2.2
