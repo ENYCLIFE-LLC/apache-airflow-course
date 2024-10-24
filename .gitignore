@@ -1,3 +1,15 @@
+.git
+# macOS specific ignore
+.DS_Store 
+
+# ignore airflow specific files
+airflow_settings.yaml
+astro
+airflow-webserver.pid
+webserver_config.py
+airflow.cfg
+airflow.db
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

@@ -10,6 +10,7 @@ pytest-cov = "*"
 black = "*"
 click = "*"
 behave = "*"
+pylint= "==3.2.6"
 
 [packages]
 apache-airflow = "==2.9.0"

@@ -8,7 +8,7 @@ Overview of the ML Pipeline
 6. Notification: Send a notification about the status of the pipeline.
 """
 from airflow import DAG
-from airflow.operators.python_operator import PythonOperator
+from airflow.operators.python import PythonOperator
 from airflow.utils.dates import days_ago
 
 # Import your ML-related libraries
@@ -33,11 +33,13 @@ dag = DAG(
     schedule_interval='@daily',
 )
 
+
 # Function to extract data
 def extract_data(**kwargs):
     # Example: Load data from CSV
     data = pd.read_csv('/path/to/data.csv')
     kwargs['ti'].xcom_push(key='raw_data', value=data)
+
 
 # Function to preprocess data
 def preprocess_data(**kwargs):
@@ -50,6 +52,7 @@ def preprocess_data(**kwargs):
     kwargs['ti'].xcom_push(key='train_data', value=(X_train, y_train))
     kwargs['ti'].xcom_push(key='test_data', value=(X_test, y_test))
 
+
 # Function to train the model
 def train_model(**kwargs):
     X_train, y_train = kwargs['ti'].xcom_pull(key='train_data')
@@ -60,6 +63,7 @@ def train_model(**kwargs):
         pickle.dump(model, model_file)
     kwargs['ti'].xcom_push(key='model', value=model)
 
+
 # Function to evaluate the model
 def evaluate_model(**kwargs):
     model = kwargs['ti'].xcom_pull(key='model')
@@ -67,6 +71,7 @@ def evaluate_model(**kwargs):
     y_pred = model.predict(X_test)
     accuracy = accuracy_score(y_test, y_pred)
     kwargs['ti'].xcom_push(key='model_accuracy', value=accuracy)
+
 
 # Function to deploy the model
 def deploy_model(**kwargs):
@@ -76,6 +81,7 @@ def deploy_model(**kwargs):
         print("Model deployed with accuracy:", accuracy)
     else:
         print("Model not deployed. Accuracy too low:", accuracy)
+
 
 # Define the tasks in the DAG
 t1 = PythonOperator(
